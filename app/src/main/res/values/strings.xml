@@ -5,6 +5,7 @@
     <string name="humidity">Humidity</string>
     <string name="wind_speed">Wind speed</string>
     <string name="wait"> Please Wait</string>
+    <string name="no_selected">No selected cities please add one to use our app</string>
     <string name="someThingWrong"> Something went wrong </string>
 
 </resources>

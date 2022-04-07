@@ -18,16 +18,11 @@ import io.reactivex.Maybe;
 public interface CitiesDao {
 
 
-    //OnConflictStrategy.REPLACE
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    Completable InsertCity(CityModel city);
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable InsertCities(List<CityModel> cities);
 
     @Query("SELECT * FROM cities_table")
     Maybe<List<CityModel>> getCities();
-
 
 
     @Query("SELECT * FROM cities_table Where selected Like 1")

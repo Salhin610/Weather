@@ -1,23 +1,14 @@
 package com.planradar.weather;
 
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-
 import com.planradar.weather.DB.citiesTable.CitiesDataBase;
 import com.planradar.weather.models.CityModel;
 import com.planradar.weather.utils.SharedPreferencesController;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import io.reactivex.CompletableObserver;
-import io.reactivex.MaybeObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;

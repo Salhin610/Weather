@@ -1,12 +1,10 @@
 package com.planradar.weather.ui.home;
 
 import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,12 +13,10 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.SearchView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.planradar.weather.DB.citiesTable.CitiesDataBase;
 import com.planradar.weather.R;
@@ -46,7 +42,8 @@ public class HomeFragment extends Fragment implements CityInfoClick, CitiesItemC
     BottomSheetDialog bottomSheetDialog;
     Context context;
     List<CityModel> selectedCityList;
-    HomeCitiesAdapter homeCitiesAdapter ;
+    HomeCitiesAdapter homeCitiesAdapter;
+    String searchKey = null;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -60,7 +57,6 @@ public class HomeFragment extends Fragment implements CityInfoClick, CitiesItemC
         cityInfoClick = this;
         cityAddedRemovedListener = this;
         homeCitiesAdapter = new HomeCitiesAdapter(new ArrayList<>(),citiesItemClick,cityInfoClick);
-        mViewModel.getAllCities(context);
         mViewModel.retrieveSelectedCitiesFromRoomDB(context);
 
         actions();
@@ -78,8 +74,32 @@ public class HomeFragment extends Fragment implements CityInfoClick, CitiesItemC
         bottomSheetDialog.setContentView(R.layout.add_remove_city_dialog);
         RecyclerView rvAllCities;
 
+        SearchView searchView;
+        searchView = bottomSheetDialog.findViewById(R.id.sv_cities_search);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                searchKey = s;
+                mViewModel.getAllCities(context,searchKey);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+        searchView.setOnCloseListener(() -> {
+            searchKey = null;
+            mViewModel.getAllCities(context,null);
+
+            return false;
+        });
         rvAllCities = bottomSheetDialog.findViewById(R.id.all_cities);
-        mViewModel.getAllCities(context);
+        mViewModel.getAllCities(context,searchKey);
 
         mViewModel.allCities.observe(getViewLifecycleOwner(), allCitiesList->{
             rvAllCities.addItemDecoration(new DividerItemDecoration(getContext(),0));
@@ -88,6 +108,7 @@ public class HomeFragment extends Fragment implements CityInfoClick, CitiesItemC
         });
 
 
+        bottomSheetDialog.setOnDismissListener(dialogInterface -> mViewModel.retrieveSelectedCitiesFromRoomDB(context));
 
         bottomSheetDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         bottomSheetDialog.show();
@@ -95,11 +116,19 @@ public class HomeFragment extends Fragment implements CityInfoClick, CitiesItemC
 
     private void observers() {
     mViewModel.cities.observe(getViewLifecycleOwner(),citiesList->{
+
         selectedCityList = citiesList;
-            binding.citiesRv.addItemDecoration(new DividerItemDecoration(getContext(),0));
+
+        if (citiesList.size() !=0) {
+            binding.noCities.setVisibility(View.GONE);
+            binding.citiesRv.addItemDecoration(new DividerItemDecoration(getContext(), 0));
             binding.citiesRv.setLayoutManager(new LinearLayoutManager(getContext()));
-            homeCitiesAdapter = new HomeCitiesAdapter(citiesList,citiesItemClick,cityInfoClick);
+            homeCitiesAdapter = new HomeCitiesAdapter(citiesList, citiesItemClick, cityInfoClick);
             binding.citiesRv.setAdapter(homeCitiesAdapter);
+        }else{
+            binding.noCities.setVisibility(View.VISIBLE);
+
+        }
     });
     }
 
