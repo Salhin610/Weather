@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,12 @@ public class HomeAllCitiesAdapter extends RecyclerView.Adapter<HomeAllCitiesAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.cityName.setText(
+                citiesList.get(position).getCityName() + ", " +
+                        citiesList.get(position).getCountry()
+        );
 
+        holder.checkBox.setChecked(citiesList.get(position).isSelected());
         holder.checkBox.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b)
                 cityAddedRemovedListener.addCity(citiesList.get(position));
@@ -52,9 +58,12 @@ public class HomeAllCitiesAdapter extends RecyclerView.Adapter<HomeAllCitiesAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CheckBox checkBox;
+        TextView cityName;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             checkBox = itemView.findViewById(R.id.cb_city);
+            cityName = itemView.findViewById(R.id.tv_city_name);
+
         }
     }
 }

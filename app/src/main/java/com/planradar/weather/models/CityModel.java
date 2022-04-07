@@ -3,10 +3,13 @@ package com.planradar.weather.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+@Entity(tableName = "cities_table")
 public class CityModel implements Parcelable {
 
-
+    @PrimaryKey(autoGenerate = true)
     int cityId;
     String cityName;
     String country;
@@ -51,7 +54,7 @@ public class CityModel implements Parcelable {
     }
 
     public void setCountry(String country) {
-        country = country;
+        this.country = country;
     }
 
 

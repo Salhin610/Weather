@@ -41,7 +41,7 @@ public class HomeCitiesAdapter extends RecyclerView.Adapter<HomeCitiesAdapter.Vi
     public void onBindViewHolder(@NonNull HomeCitiesAdapter.ViewHolder holder, int position) {
 
         holder.cityName.setText(
-                citiesList.get(position).getCityName() + "," +
+                citiesList.get(position).getCityName() + ", " +
                         citiesList.get(position).getCountry()
         );
         holder.itemView.setOnClickListener(v->
