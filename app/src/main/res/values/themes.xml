@@ -1,0 +1,30 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Weather" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="regular_text" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="medium_text" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+    <style name="bold_text" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">@color/black</item>
+
+    </style>
+
+</resources>
