@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.planradar.weather.DB.citiesTable.CitiesDataBase;
+import com.planradar.weather.DB.CitiesDataBase;
 import com.planradar.weather.R;
 import com.planradar.weather.adapters.HomeAllCitiesAdapter;
 import com.planradar.weather.adapters.HomeCitiesAdapter;
@@ -121,11 +121,14 @@ public class HomeFragment extends Fragment implements CityInfoClick, CitiesItemC
 
         if (citiesList.size() !=0) {
             binding.noCities.setVisibility(View.GONE);
+            binding.citiesRv.setVisibility(View.VISIBLE);
+
             binding.citiesRv.addItemDecoration(new DividerItemDecoration(getContext(), 0));
             binding.citiesRv.setLayoutManager(new LinearLayoutManager(getContext()));
             homeCitiesAdapter = new HomeCitiesAdapter(citiesList, citiesItemClick, cityInfoClick);
             binding.citiesRv.setAdapter(homeCitiesAdapter);
         }else{
+            binding.citiesRv.setVisibility(View.GONE);
             binding.noCities.setVisibility(View.VISIBLE);
 
         }

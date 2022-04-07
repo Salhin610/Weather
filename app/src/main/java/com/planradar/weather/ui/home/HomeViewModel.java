@@ -1,9 +1,11 @@
 package com.planradar.weather.ui.home;
 
 import android.content.Context;
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import com.planradar.weather.DB.citiesTable.CitiesDataBase;
+import com.planradar.weather.DB.CitiesDataBase;
 import com.planradar.weather.models.CityModel;
 
 import java.util.ArrayList;
@@ -75,6 +77,8 @@ public class HomeViewModel extends ViewModel {
 
                     @Override
                     public void onSuccess(List<CityModel> cityModels) {
+                        Log.e("Success",cityModels.size()+" ff");
+
                         cities.setValue(cityModels);
 
                     }
@@ -82,6 +86,7 @@ public class HomeViewModel extends ViewModel {
                     @Override
                     public void onError(Throwable e) {
 
+                        Log.e("Error",e.getMessage());
                     }
 
                     @Override

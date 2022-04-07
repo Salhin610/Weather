@@ -1,15 +1,17 @@
-package com.planradar.weather.DB.citiesTable;
+package com.planradar.weather.DB;
 
 import android.content.Context;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import com.planradar.weather.models.CityModel;
 
 
-@Database(entities = CityModel.class,version = 1)
+@Database(entities = {CityModel.class},version = 4)
+@TypeConverters(Converter.class)
 abstract public class CitiesDataBase extends RoomDatabase {
 
     private static CitiesDataBase instance;

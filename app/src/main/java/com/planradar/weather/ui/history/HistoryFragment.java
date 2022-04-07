@@ -2,6 +2,7 @@ package com.planradar.weather.ui.history;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,27 +27,32 @@ public class HistoryFragment extends Fragment implements Constants {
 
 
     FragmentHistoryBinding binding;
+    Context context;
+    CityModel cityModel;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         mViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
         binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        context = getContext();
+         cityModel = getArguments().getParcelable(bundleCity);
 
-        CityModel cityModel = getArguments().getParcelable(bundleCity);
-
-        mViewModel.getHistory();
+        mViewModel.getHistory(context,cityModel);
 
         binding.back.setOnClickListener(v->getActivity().onBackPressed());
-        binding.history.addItemDecoration(new DividerItemDecoration(getContext(),0));
-        binding.history.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.history.setAdapter(new WeatherHistoryAdapter());
+
         observers();
         return root;
     }
 
     private void observers() {
 
+        mViewModel.weatherRecordHistory.observe(getViewLifecycleOwner(), weatherRecordModelList -> {
+            binding.history.addItemDecoration(new DividerItemDecoration(getContext(),0));
+            binding.history.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.history.setAdapter(new WeatherHistoryAdapter(context,weatherRecordModelList));
+        });
     }
 
 }

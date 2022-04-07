@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.planradar.weather.R;
 import com.planradar.weather.databinding.FragmentWeatherBinding;
 import com.planradar.weather.models.CityModel;
@@ -27,6 +29,7 @@ public class WeatherFragment extends Fragment implements Constants {
 
     FragmentWeatherBinding binding;
     Context context;
+    CityModel cityModel;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -34,12 +37,13 @@ public class WeatherFragment extends Fragment implements Constants {
         binding = FragmentWeatherBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         context = getContext();
-        CityModel cityModel = getArguments().getParcelable(bundleCity);
+         cityModel = getArguments().getParcelable(bundleCity);
         binding.tvCityName.setText(cityModel.getCityName()+", "+cityModel.getCountry());
 
 
         ProgressBar.showProgressDialog(context);
-        mViewModel.getWeather(cityModel.getCityName());
+        mViewModel.getWeather(context, cityModel);
+
         binding.back.setOnClickListener(v->getActivity().onBackPressed());
         observers();
 
@@ -52,6 +56,21 @@ public class WeatherFragment extends Fragment implements Constants {
         mViewModel.humidity.observe(getViewLifecycleOwner(),description-> binding.tvHumidity.setText(description));
         mViewModel.windSpeed.observe(getViewLifecycleOwner(),description-> binding.tvWindSpeed.setText(description));
         mViewModel.temperature.observe(getViewLifecycleOwner(),description-> binding.tvTemperature.setText(description));
+        mViewModel.iconLink.observe(getViewLifecycleOwner(),iconId->{
+                Glide.with(context)
+                .asBitmap()
+                .load(imagesBaseURL+iconId+".png")
+                .into(binding.icon);
+            Log.e("Link",imagesBaseURL+iconId+".png");
+
+        });
+
+        mViewModel.callDate.observe(getViewLifecycleOwner(),date->{
+            binding.info.setText("Weather information for "+cityModel.getCityName()+" received on");
+            binding.date.setText(date);
+
+
+        });
         mViewModel.callSucceed.observe(getViewLifecycleOwner(),succeeded->{
             ProgressBar.hideProgressDialog();
 
@@ -61,9 +80,7 @@ public class WeatherFragment extends Fragment implements Constants {
         });
         mViewModel.onFailure.observe(getViewLifecycleOwner(),failureMessage->{
             ProgressBar.hideProgressDialog();
-
                 Toast.makeText(context,failureMessage,Toast.LENGTH_LONG).show();
-
         });
     }
 }

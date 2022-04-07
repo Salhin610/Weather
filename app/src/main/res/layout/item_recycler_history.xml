@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:padding="10dp"
-    android:layout_marginTop="10dp"    android:layout_height="wrap_content">
+    android:layout_marginTop="10dp"
+    android:layout_height="wrap_content">
     <ImageView
+        android:id="@+id/icon"
         android:src="@drawable/city"
         android:layout_width="50dp"
         android:layout_height="50dp"/>
@@ -14,14 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:text="01.10.2019.- 16:58"
+            android:id="@+id/date"
             android:layout_width="match_parent"
             android:textColor="@color/txt_gray"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/description_temperature"
             style="@style/bold_text"
             android:textSize="15dp"
-            android:text="Rainy, 9 C"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

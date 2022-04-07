@@ -1,4 +1,4 @@
-package com.planradar.weather.DB.citiesTable;
+package com.planradar.weather.DB;
 
 
 import androidx.room.Dao;
@@ -23,6 +23,10 @@ public interface CitiesDao {
 
     @Query("SELECT * FROM cities_table")
     Maybe<List<CityModel>> getCities();
+
+
+    @Query("SELECT * FROM cities_table Where cityId = :cityId")
+    Maybe<CityModel> getCity( int cityId);
 
 
     @Query("SELECT * FROM cities_table Where selected Like 1")

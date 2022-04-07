@@ -8,7 +8,6 @@
 
     <TextView
         android:id="@+id/tv_city_name"
-        android:text="Cairo"
         android:layout_weight="1"
         style="@style/medium_text"
         android:layout_width="match_parent"

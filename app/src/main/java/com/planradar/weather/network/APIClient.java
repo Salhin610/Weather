@@ -2,6 +2,7 @@ package com.planradar.weather.network;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.planradar.weather.utils.Constants;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +10,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class APIClient {
+public class APIClient implements Constants {
     public static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
@@ -28,7 +29,7 @@ public class APIClient {
 
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.openweathermap.org/")
+                .baseUrl(baseURL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
 

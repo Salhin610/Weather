@@ -30,7 +30,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <LinearLayout
 
-        android:padding="10dp"
+        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -56,6 +56,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
+            android:id="@+id/icon"
             android:src="@drawable/city"
             android:layout_width="match_parent"
             android:layout_height="100dp" />
@@ -74,7 +75,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="start"
-                android:textSize="15dp"
+
+                android:textSize="13dp"
                 android:text="@string/description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -87,9 +89,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="Cloudy"
                 android:textColor="@color/blue"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -109,7 +110,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="start"
-                android:textSize="15dp"
+                android:textSize="13dp"
                 android:text="@string/temperature"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -122,9 +123,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="20 C"
                 android:textColor="@color/blue"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -145,7 +145,7 @@
                 android:layout_weight="1"
                 android:gravity="start"
                 android:text="@string/humidity"
-                android:textSize="15dp"
+                android:textSize="13dp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -158,9 +158,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="45%"
                 android:textColor="@color/blue"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -181,7 +180,7 @@
                 android:layout_weight="1"
                 android:gravity="start"
                 android:text="@string/wind_speed"
-                android:textSize="15dp"
+                android:textSize="13dp"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -194,9 +193,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="20 Km/h"
                 android:textColor="@color/blue"
-                android:textSize="20dp"
+                android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -205,17 +203,32 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:gravity="center"
-        android:textColor="@color/txt_gray"
-        android:text="Weather information for cairo received on \n 03.10.2019 - 11:28"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/txt_gray"
+            />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/txt_gray"
+            android:text="03.10.2019 - 11:28"
+            />
+    </LinearLayout>
+
 
     <ImageView
         android:layout_width="match_parent"
