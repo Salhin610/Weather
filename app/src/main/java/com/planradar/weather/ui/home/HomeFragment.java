@@ -133,6 +133,7 @@ public class HomeFragment extends Fragment implements CityInfoClick, CitiesItemC
 
     @Override
     public void removeCity(CityModel cityModel) {
+        
         Log.e("RemoveCity", cityModel.getCityId()+"");
 
     }

@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/work/PlanRadar/Weather/app/src/main/res/layout/add_remove_city_dialog.xml" value="0.36666666666666664" />
+        <entry key="..\:/work/PlanRadar/Weather/app/src/main/res/layout/fragment_weather.xml" value="0.36666666666666664" />
         <entry key="..\:/work/PlanRadar/Weather/app/src/main/res/layout/main_activity.xml" value="0.36666666666666664" />
+        <entry key="..\:/work/PlanRadar/Weather/app/src/main/res/layout/progress_bar.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

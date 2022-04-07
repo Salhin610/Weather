@@ -4,4 +4,7 @@
     <string name="temperature">Temperature</string>
     <string name="humidity">Humidity</string>
     <string name="wind_speed">Wind speed</string>
+    <string name="wait"> Please Wait</string>
+    <string name="someThingWrong"> Something went wrong </string>
+
 </resources>
